@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_button.dart';
+import '../widgets/custon_text.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -39,15 +40,15 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               SizedBox(height: 8),
-              TextField(decoration: InputDecoration(hintText: "Enter e-mail")),
+              CustomTextField(hintText: 'Enter e-mail'),
               SizedBox(height: 8),
-              TextField(decoration: InputDecoration(hintText: "Enter e-mail")),
+              CustomTextField(hintText: ' Enter Password'),
               SizedBox(height: 10),
               CustomButton(
                 onTap: () {},
-                title: "SignUp",
+                title: 'Sign In',
                 colo: Colors.white,
-                FnSize: 25,
+                FnSize: 20,
               ),
             ],
           ),
