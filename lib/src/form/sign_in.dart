@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -14,11 +15,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _FormKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController adressController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Form(
-            key: _FormKey,
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,7 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 8),
                 CustomTextField(
                   hintText: 'name',
-                  nameController: nameController,
+                  Controller: nameController,
                   keyType: TextInputType.name,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -63,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 8),
                 CustomTextField(
                   hintText: 'phone',
-                  nameController: phoneController,
+                  Controller: phoneController,
                   keyType: TextInputType.phone,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -75,10 +76,10 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 8),
                 CustomTextField(
                   hintText: "email",
-                  nameController: emailController,
+                  Controller: emailController,
                   keyType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value == "") {
                       return "Email required";
                     }
                     return null;
@@ -87,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 8),
                 CustomTextField(
                   hintText: "adress",
-                  nameController: adressController,
+                  Controller: addressController,
                   keyType: TextInputType.streetAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -99,7 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 8),
                 CustomTextField(
                   hintText: "password",
-                  nameController: passController,
+                  Controller: passController,
                   keyType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -111,10 +112,18 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 20),
                 CustomButton(
                   onTap: () {
-                    if (!_FormKey.currentState!.validate()) {
-                      print("Form Valid ✅");
-                    }
+                    /*if (_formKey.currentState?.validate() ?? false) {
+                    } else {}*/
+                    var a = {
+                      "name": nameController.text,
+                      "phone": phoneController.text,
+                      "email": emailController.text,
+                      "adress": addressController.text,
+                      "password": passController.text,
+                    };
+                    log("==${jsonEncode(a)}");
                   },
+
                   title: 'Sign In',
                   colo: Colors.white,
                   FnSize: 20,
