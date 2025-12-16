@@ -15,6 +15,11 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _FormKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController adressController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Form(
+            key: _FormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,16 +49,71 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 SizedBox(height: 8),
-                CustomTextField(hintText: 'Enter e-mail'),
+                CustomTextField(
+                  hintText: 'name',
+                  nameController: nameController,
+                  keyType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Name required";
+                    }
+                    return null;
+                  },
+                ),
                 SizedBox(height: 8),
-                CustomTextField(hintText: ' Enter Password'),
-                SizedBox(height: 10),
+                CustomTextField(
+                  hintText: 'phone',
+                  nameController: phoneController,
+                  keyType: TextInputType.phone,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Phone required";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 8),
+                CustomTextField(
+                  hintText: "email",
+                  nameController: emailController,
+                  keyType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Email required";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 8),
+                CustomTextField(
+                  hintText: "adress",
+                  nameController: adressController,
+                  keyType: TextInputType.streetAddress,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Adress required";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 8),
+                CustomTextField(
+                  hintText: "password",
+                  nameController: passController,
+                  keyType: TextInputType.visiblePassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password required";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
                 CustomButton(
                   onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
+                    if (!_FormKey.currentState!.validate()) {
+                      print("Form Valid ✅");
+                    }
                   },
                   title: 'Sign In',
                   colo: Colors.white,
