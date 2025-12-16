@@ -4,9 +4,13 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, required this.hintText});
   final String hintText;
 
-
   @override
   Widget build(BuildContext context) {
-    return TextField(decoration: InputDecoration(hintText: hintText));
+    return TextField(
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+      ),
+    );
   }
 }
