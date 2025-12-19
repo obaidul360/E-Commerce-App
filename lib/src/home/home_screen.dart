@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../form/sign_in.dart';
+import '../form/sign_up.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SignInScreen()),
+              MaterialPageRoute(builder: (context) => SignUpScreen()),
             );
           },
           icon: Icon(Icons.arrow_back_rounded, size: 28),

@@ -1,4 +1,4 @@
-import 'package:e_commerce/src/form/sign_in.dart';
+import 'package:e_commerce/src/form/sign_up.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
-        home: SignInScreen(),
+        home: SignUpScreen(),
       ),
     );
   }

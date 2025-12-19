@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 
-class SignInController {
-  Future<bool> createAccountFun({required Map data}) async {
+class SignUpController {
+  Future<bool> createSignUpAccountFun({required Map data}) async {
     try {
       Uri uri = Uri.parse("https://b4.coderangon.com/api/register");
       var header = {"accept": "application/json"};
