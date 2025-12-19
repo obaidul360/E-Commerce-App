@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../controller/controller.dart';
 import '../home/home_screen.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custon_text_field.dart';
@@ -21,6 +22,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,24 +112,33 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                 ),
                 SizedBox(height: 20),
-                CustomButton(
-                  onTap: () {
-                    /*if (_formKey.currentState?.validate() ?? false) {
-                    } else {}*/
-                    var a = {
-                      "name": nameController.text,
-                      "phone": phoneController.text,
-                      "email": emailController.text,
-                      "adress": addressController.text,
-                      "password": passController.text,
-                    };
-                    log("==${jsonEncode(a)}");
-                  },
+                isLoading == true
+                    ? CircularProgressIndicator()
+                    : CustomButton(
+                        onTap: () async {
+                          if (_formKey.currentState?.validate() ?? false) {}
+                          var info = {
+                            "name": nameController.text,
+                            "phone": phoneController.text,
+                            "email": emailController.text,
+                            "address": addressController.text,
+                            "password": passController.text,
+                          };
+                          isLoading == true;
+                          setState(() {});
+                          bool status = await SignInController()
+                              .createAccountFun(data: info);
+                          isLoading == false;
+                          setState(() {});
+                          if (status == true) {
+                            // Got to Next Screen
+                          }
+                        },
 
-                  title: 'Sign In',
-                  colo: Colors.white,
-                  FnSize: 20,
-                ),
+                        title: 'Sign In',
+                        colo: Colors.white,
+                        FnSize: 20,
+                      ),
               ],
             ),
           ),

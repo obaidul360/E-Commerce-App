@@ -1,30 +1,27 @@
+import 'dart:convert';
+
 import 'dart:developer';
-
-import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
 
 class SignInController {
-  Future<void> createAccountFun() async {
+  Future<bool> createAccountFun({required Map data}) async {
     try {
       Uri uri = Uri.parse("https://b4.coderangon.com/api/register");
-      var body = {
-        "name": "gdcvb",
-        "phone": "01751091110",
-        "email": "c@gmail.com",
-        "address": "gsnn",
-        "password": "hdfghhuu",
-      };
-      var res = await http.post(uri, body: body);
-      if(res.statusCode==200){
+      var header = {"accept": "application/json"};
+
+      var res = await http.post(uri, body: data, headers: header);
+      if (res.statusCode == 201) {
         log("Succes");
-      }
-      else if (res.statusCode==422) {
+        return true;
+      } else if (res.statusCode == 422) {
         log("Email or Phone Already taked");
-        
-      }  
+        var e = jsonDecode(res.body);
+        log("${e['message']}");
+        return false;
+      }
     } catch (e) {
       log("$e");
     }
+    return false;
   }
 }

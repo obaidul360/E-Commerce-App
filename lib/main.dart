@@ -1,4 +1,6 @@
 import 'package:e_commerce/src/form/sign_in.dart';
+
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +19,7 @@ class _MyAppState extends State<MyApp> {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: EasyLoading.init(),
         home: SignInScreen(),
       ),
     );
